@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 07.02.2018 08:37:12
+-- Create Date: 21.03.2018 12:18:36
 -- Design Name: 
--- Module Name: ClockingModule - Behavioral
+-- Module Name: ram16 - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,31 +31,29 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity ClockingModule is
-    Port ( iClk : in STD_LOGIC;
-           reset : in STD_LOGIC;
-           oClk : out STD_LOGIC);
-end ClockingModule;
+entity ram16 is
+    Port ( I_clk : in STD_LOGIC;
+           I_we : in STD_LOGIC;
+           I_addr : in STD_LOGIC;
+           I_data : in STD_LOGIC;
+           O_data : out STD_LOGIC);
+end ram16;
 
-architecture Behavioral of ClockingModule is
-    signal temp : std_logic;
-    signal cnt : integer range 0 to 99999999 := 0;
+architecture Behavioral of ram16 is
+    type memoire is array (0 to 31) of std_logic_vector(15 downto 0);
+    signal ram_16: memoire := (others => X"0000");
 begin
-    freq_div : process(reset,iClk) begin
-        if(reset = '1') then
-            temp <= '0';
-            cnt <= 0;
-        elsif rising_edge(iClk) then
-            if( cnt = 99999999) then
-                temp <= NOT(temp);
-                cnt <= 0;
-            else
-                cnt <= cnt + 1;
-            end if;
+
+    process(I_clk)
+    begin
+        if(rising_edge(I_clk)) then
+        if(I_we = '1') then
+          ram_16(to_integer(unsigned(I_addr(5 downto 0)))) <= I_data;
+         else
+          O_data <= ram_16(to_integer(unsigned(I_addr(5 downto 0))));
+        end if;
         end if;
     end process;
-    
-    oClk <= temp;
 
 
 end Behavioral;

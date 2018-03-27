@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 07.02.2018 08:37:12
+-- Create Date: 21.03.2018 09:08:02
 -- Design Name: 
--- Module Name: ClockingModule - Behavioral
+-- Module Name: cpu_fpga - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,31 +31,17 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity ClockingModule is
-    Port ( iClk : in STD_LOGIC;
-           reset : in STD_LOGIC;
-           oClk : out STD_LOGIC);
-end ClockingModule;
+entity cpu_fpga is
+    Port ( I_CLK_100 : in STD_LOGIC;
+           I_SWITCH : in STD_LOGIC_VECTOR(9 downto 0);
+           Q_7_SEGMENT : out STD_LOGIC_VECTOR(6 downto 0));
+end cpu_fpga;
 
-architecture Behavioral of ClockingModule is
-    signal temp : std_logic;
-    signal cnt : integer range 0 to 99999999 := 0;
+architecture Behavioral of cpu_fpga is
+    component core
+        port ( I_CLK : in std_logic;
+               I_CLR
 begin
-    freq_div : process(reset,iClk) begin
-        if(reset = '1') then
-            temp <= '0';
-            cnt <= 0;
-        elsif rising_edge(iClk) then
-            if( cnt = 99999999) then
-                temp <= NOT(temp);
-                cnt <= 0;
-            else
-                cnt <= cnt + 1;
-            end if;
-        end if;
-    end process;
-    
-    oClk <= temp;
 
 
 end Behavioral;
