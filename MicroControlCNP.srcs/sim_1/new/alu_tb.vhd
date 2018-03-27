@@ -61,7 +61,7 @@ architecture Behavioral of alu_tb is
                 O_selD : out STD_LOGIC_VECTOR (2 downto 0);
                 O_imm : out STD_LOGIC_VECTOR(15 downto 0);
                 O_regDwe : out STD_LOGIC;
-                O_aluop : in STD_LOGIC_VECTOR (4 downto 0)
+                O_aluop : out STD_LOGIC_VECTOR (4 downto 0)
                );
       END COMPONENT;
       
@@ -79,11 +79,20 @@ architecture Behavioral of alu_tb is
               );
           END COMPONENT;
           
-      
+      COMPONENT controlunit
+       PORT (I_clk : in STD_LOGIC;
+             I_reset : in STD_LOGIC;
+             O_state : out STD_LOGIC_VECTOR (3 downto 0));
+          
+      END COMPONENT;
      
      
      signal I_clk : std_logic := '0';
-     signal I_en : std_logic := '0';
+     signal reset: std_logic := '0';
+     signal en_decoder : std_logic := '0';
+     signal en_readReg: std_logic := '0';
+     signal en_alu: std_logic := '0';
+     signal en_regWrite: std_logic := '0';
      signal I_aluop: std_logic_vector (4 downto 0) := (others => '0');
      signal I_dataA: STD_LOGIC_VECTOR (15 downto 0) := (others => '0');
      signal I_dataB: STD_LOGIC_VECTOR (15 downto 0) := (others => '0');
@@ -93,6 +102,8 @@ architecture Behavioral of alu_tb is
      signal O_dataRes : std_logic_vector(15 downto 0);
      signal O_dataWriteReg: std_logic;
      signal O_shouldBranch: std_logic;
+     
+     signal instruction: std_logic_vector (15 downto 0) := (others => '0');
      
      --- RAM
      
@@ -105,17 +116,35 @@ architecture Behavioral of alu_tb is
            signal O_dataA : std_logic_vector(15 downto 0);
            signal O_dataB : std_logic_vector(15 downto 0);
      
+     signal state: std_logic_vector(3 downto 0);
      constant I_clk_period: time := 10ns; 
         
 begin
-
+    uut_dec: decoder PORT MAP (
+                I_instr => instruction,
+               I_clk => I_clk,
+               I_enable => en_decoder,
+               O_selD => I_selD,
+               O_selA => I_selA,
+               O_selB => I_selB,
+               O_imm => I_imm,
+               O_regDwe => I_dataDwe,
+               O_aluop => I_aluop
+              );
+              
+     uut_controlunit: controlunit PORT MAP (
+        I_clk=> I_clk,
+        I_reset => reset,
+        O_state => state);
+        
+              
     uut_alu: alu PORT MAP(
         I_clk => I_clk,
-        I_en => I_en,
+        I_en => en_alu,
         I_PC=>I_PC,
         I_aluop => I_aluop,
-        I_dataA => I_dataA,
-        I_dataB => I_dataB,
+        I_dataA => O_dataA,
+        I_dataB => O_dataB,
         I_dataDwe => I_dataDwe,
         I_imm => I_imm,
         O_dataRes => O_dataRes,
@@ -124,25 +153,21 @@ begin
         
      uut_ram: reg16_8 PORT MAP (
         I_clk => I_clk,
-        I_en => '1',
+        I_en => en_readReg or en_regWrite,
         I_dataD => O_dataRes,
         O_dataA => O_dataA,
         O_dataB => O_dataB,
         I_selA => I_selA,
         I_selB => I_selB,
         I_selD => I_selD,
-        I_we => O_dataWriteReg
+        I_we => O_dataWriteReg AND en_regWrite
        );
        
-       uut_dec: decoder PORT MAP (
-               I_clk => I_clk,
-               I_en => I_en,
-               O_selD => I_selD,
-               O_dataA => O_dataA,
-               O_dataB => O_dataB,
-               -- A COMPLETER
-               I_we => O_dataWriteReg
-              );
+       en_decoder <= state(0);
+       en_readReg <= state(1);
+       en_alu <= state(2);
+       en_regWrite <= state(3);
+       
         
         I_clk_process: process
         begin
@@ -154,18 +179,41 @@ begin
         
         stim_proc: process
         begin
-            wait for 100 ns;
-            wait for I_clk_period*10;
-            
-            I_en <= '1';
-            
-            I_dataA <= X"0001";
-            I_dataB <= X"0002";
-            I_aluop <= OPCODE_ADD & '0';
-            I_imm <= X"F1FA";
-             
-            wait for I_clk_period;
-         end process;
+          -- hold reset state for 100 ns.
+          wait for 100 ns;  
+          wait for I_clk_period*10;
+          
+          reset <= '1'; -- reset control unit
+          --load.h r0,0xfe
+          instruction <= OPCODE_LOAD & "000" & '0' & X"fe";
+          reset <= '0'; -- enable/start control unit
+          wait until en_regwrite = '1';
+           
+          --load.l r1, 0xed
+          instruction <= OPCODE_LOAD & "001" & '1' & X"ed";
+          wait until en_regwrite = '1';
+           
+          --or r2, r0, r1
+          instruction <= OPCODE_OR & "010" & '0' & "000" & "001" & "00";
+          wait until en_regwrite = '1';
+           
+          --load.l r3, 1
+          instruction <= OPCODE_LOAD & "011" & '1' & X"01";
+          wait until en_regwrite = '1';
+           
+          --load.l r4, 2
+          instruction <= OPCODE_LOAD & "100" & '1' & X"02";
+          wait until en_regwrite = '1';
+           
+          --add.u r3, r3, r4
+          instruction <= OPCODE_ADD & "011" & '0' & "011" & "100" & "00";
+          wait until en_regwrite = '1';
+           
+          --or r5, r0, r3
+          instruction <= OPCODE_OR & "101" & '0' & "000" & "011" & "00";
+          wait until en_regwrite = '1';
+
+        end process;
 
 
 end Behavioral;

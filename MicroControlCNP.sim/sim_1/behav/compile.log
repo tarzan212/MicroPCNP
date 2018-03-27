@@ -1,5 +1,13 @@
 INFO: [VRFC 10-163] Analyzing VHDL file "D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.srcs/sources_1/new/constantes.vhd" into library xil_defaultlib
+INFO: [VRFC 10-163] Analyzing VHDL file "D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.srcs/sources_1/imports/new/reg16_8.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity reg16_8
+INFO: [VRFC 10-163] Analyzing VHDL file "D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.srcs/sources_1/new/decoder.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity decoder
+INFO: [VRFC 10-163] Analyzing VHDL file "D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.srcs/sources_1/new/controlunit.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity controlunit
 INFO: [VRFC 10-163] Analyzing VHDL file "D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.srcs/sources_1/new/alu.vhd" into library xil_defaultlib
 INFO: [VRFC 10-307] analyzing entity alu
 INFO: [VRFC 10-163] Analyzing VHDL file "D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.srcs/sim_1/new/alu_tb.vhd" into library xil_defaultlib
 INFO: [VRFC 10-307] analyzing entity alu_tb
+WARNING: [VRFC 10-280] actual for formal port i_en is neither a static name nor a globally static expression [D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.srcs/sim_1/new/alu_tb.vhd:156]
+WARNING: [VRFC 10-280] actual for formal port i_we is neither a static name nor a globally static expression [D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.srcs/sim_1/new/alu_tb.vhd:163]

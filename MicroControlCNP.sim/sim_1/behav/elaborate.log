@@ -11,6 +11,9 @@ Compiling package std.standard
 Compiling package ieee.std_logic_1164
 Compiling package xil_defaultlib.constantes
 Compiling package ieee.numeric_std
+Compiling architecture behavioral of entity xil_defaultlib.decoder [decoder_default]
+Compiling architecture behavioral of entity xil_defaultlib.controlunit [controlunit_default]
 Compiling architecture behavioral of entity xil_defaultlib.alu [alu_default]
+Compiling architecture behavioral of entity xil_defaultlib.reg16_8 [reg16_8_default]
 Compiling architecture behavioral of entity xil_defaultlib.alu_tb
 Built simulation snapshot alu_tb_behav

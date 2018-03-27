@@ -34,7 +34,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity controlunit is
     Port ( I_clk : in STD_LOGIC;
            I_reset : in STD_LOGIC;
-           O_state : in STD_LOGIC_VECTOR (3 downto 0));
+           O_state : out STD_LOGIC_VECTOR (3 downto 0));
 end controlunit;
 
 architecture Behavioral of controlunit is

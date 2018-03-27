@@ -40,7 +40,7 @@ entity decoder is
            O_selD : out STD_LOGIC_VECTOR (2 downto 0);
            O_imm : out STD_LOGIC_VECTOR(15 downto 0);
            O_regDwe : out STD_LOGIC;
-           O_aluop : in STD_LOGIC_VECTOR (4 downto 0));
+           O_aluop : out STD_LOGIC_VECTOR (4 downto 0));
 end decoder;
 
 architecture Behavioral of decoder is
@@ -48,7 +48,7 @@ architecture Behavioral of decoder is
 begin
     process(I_clk)
     begin
-        if rising_edge(I_clk) and I_en = '1' then
+        if rising_edge(I_clk) and I_enable = '1' then
         
             O_selA <= I_instr(7 downto 5);
             O_selB <= I_instr(4 downto 2);
