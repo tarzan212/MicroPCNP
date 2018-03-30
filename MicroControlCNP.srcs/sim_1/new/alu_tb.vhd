@@ -82,9 +82,26 @@ architecture Behavioral of alu_tb is
       COMPONENT controlunit
        PORT (I_clk : in STD_LOGIC;
              I_reset : in STD_LOGIC;
-             O_state : out STD_LOGIC_VECTOR (3 downto 0));
+             O_state : out STD_LOGIC_VECTOR (4 downto 0));
           
       END COMPONENT;
+      COMPONENT ram16 
+      Port ( I_clk : in STD_LOGIC;
+                 I_we : in STD_LOGIC;
+                 I_addr : in STD_LOGIC_VECTOR(15 downto 0);
+                 I_data : in STD_LOGIC_VECTOR(15 downto 0);
+                 O_data : out STD_LOGIC_VECTOR(15 downto 0)
+            );
+      END COMPONENT;
+      
+      COMPONENT program_counter 
+      Port ( I_clk : in STD_LOGIC;
+                 I_nPc : in STD_LOGIC_VECTOR (15 downto 0);
+                 I_nPCopcode : in STD_LOGIC_VECTOR (1 downto 0);
+                 O_pc : out STD_LOGIC_VECTOR (15 downto 0)
+                 );
+      END COMPONENT;
+      
      
      
      signal I_clk : std_logic := '0';
@@ -94,14 +111,19 @@ architecture Behavioral of alu_tb is
      signal en_alu: std_logic := '0';
      signal en_regWrite: std_logic := '0';
      signal I_aluop: std_logic_vector (4 downto 0) := (others => '0');
-     signal I_dataA: STD_LOGIC_VECTOR (15 downto 0) := (others => '0');
-     signal I_dataB: STD_LOGIC_VECTOR (15 downto 0) := (others => '0');
      signal I_imm: std_logic_vector (15 downto 0) := (others => '0');
      signal I_dataDwe: std_logic := '0';
      signal I_PC: std_logic_vector(15 downto 0) := (others => '0');
      signal O_dataRes : std_logic_vector(15 downto 0);
      signal O_dataWriteReg: std_logic;
      signal O_shouldBranch: std_logic;
+     
+     signal ramwe : std_logic := '0';
+     signal addrRam : std_logic_vector(15 downto 0);
+     signal dataReadRam : std_logic_vector(15 downto 0);
+     signal dataWriteRam : std_logic_vector(15 downto 0);
+     signal pcOp : std_logic_vector(1 downto 0);
+     signal pcIn : std_logic_vector(15 downto 0);
      
      signal instruction: std_logic_vector (15 downto 0) := (others => '0');
      
@@ -116,7 +138,7 @@ architecture Behavioral of alu_tb is
            signal O_dataA : std_logic_vector(15 downto 0);
            signal O_dataB : std_logic_vector(15 downto 0);
      
-     signal state: std_logic_vector(3 downto 0);
+     signal state: std_logic_vector(4 downto 0);
      constant I_clk_period: time := 10ns; 
         
 begin
@@ -163,6 +185,28 @@ begin
         I_we => O_dataWriteReg AND en_regWrite
        );
        
+       uut_ram16 : ram16 PORT MAP (
+           I_clk => I_clk,
+           I_we => ramwe,
+           I_addr => addrRam,
+           I_data => dataWriteRam,
+           O_data => dataReadRam);
+           
+       uut_pc : program_counter PORT MAP (
+           I_clk => I_clk,
+           I_nPc => pcIn,
+           I_nPCopcode => pcOp,
+           O_pc => I_PC );
+           
+           addrRam <= I_PC;
+           dataWriteRam <= X"FFFF";
+           ramwe <= '0';
+           instruction <= dataReadRam;
+           
+           pcOp <= PCU_OP_RESET when reset = '1' else
+                   PCU_OP_ASSIGN when O_shouldBranch = '1' and state(4) = '1' else
+                   PCU_OP_INC when O_shouldBranch = '0' and state(4) = '1' else
+                   PCU_OP_NOP;
        en_decoder <= state(0);
        en_readReg <= state(1);
        en_alu <= state(2);
@@ -177,41 +221,16 @@ begin
             wait for I_clk_period/2;
         end process;
         
+        pcIn <= O_dataRes;
+        
         stim_proc: process
         begin
-          -- hold reset state for 100 ns.
-          wait for 100 ns;  
-          wait for I_clk_period*10;
           
           reset <= '1'; -- reset control unit
-          --load.h r0,0xfe
-          instruction <= OPCODE_LOAD & "000" & '0' & X"fe";
-          reset <= '0'; -- enable/start control unit
-          wait until en_regwrite = '1';
-           
-          --load.l r1, 0xed
-          instruction <= OPCODE_LOAD & "001" & '1' & X"ed";
-          wait until en_regwrite = '1';
-           
-          --or r2, r0, r1
-          instruction <= OPCODE_OR & "010" & '0' & "000" & "001" & "00";
-          wait until en_regwrite = '1';
-           
-          --load.l r3, 1
-          instruction <= OPCODE_LOAD & "011" & '1' & X"01";
-          wait until en_regwrite = '1';
-           
-          --load.l r4, 2
-          instruction <= OPCODE_LOAD & "100" & '1' & X"02";
-          wait until en_regwrite = '1';
-           
-          --add.u r3, r3, r4
-          instruction <= OPCODE_ADD & "011" & '0' & "011" & "100" & "00";
-          wait until en_regwrite = '1';
-           
-          --or r5, r0, r3
-          instruction <= OPCODE_OR & "101" & '0' & "000" & "011" & "00";
-          wait until en_regwrite = '1';
+          wait for I_clk_period;
+          reset <= '0';
+         
+          wait;
 
         end process;
 

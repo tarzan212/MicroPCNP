@@ -21,6 +21,9 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+library work;
+use work.constantes.all;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -35,7 +38,7 @@ entity program_counter is
     Port ( I_clk : in STD_LOGIC;
            I_nPc : in STD_LOGIC_VECTOR (15 downto 0);
            I_nPCopcode : in STD_LOGIC_VECTOR (1 downto 0);
-           O_pc : in STD_LOGIC_VECTOR (15 downto 0));
+           O_pc : out STD_LOGIC_VECTOR (15 downto 0));
 end program_counter;
 
 architecture Behavioral of program_counter is

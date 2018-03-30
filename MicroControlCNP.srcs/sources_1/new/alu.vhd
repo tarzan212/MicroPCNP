@@ -74,6 +74,23 @@ begin
                           s_result(15 downto 0) <= X"00" & I_imm(7 downto 0);
                         end if;
                         s_shouldBranch <= '0';
+                  when OPCODE_AND =>
+                        if I_aluop(0) = '0' then
+                            s_result(16 downto 0) <= std_logic_vector(unsigned('0' & I_dataA) AND unsigned('0' & I_dataB));
+                        else 
+                            s_result(16 downto 0) <= std_logic_vector(signed(I_dataA(15) & I_dataA) AND signed(I_dataB(15) & I_dataB));
+                        end if;
+                        
+                  when OPCODE_JUMP => 
+                         if I_aluop(0) = '0' then
+                                                -- set PC to reg(a) 
+                               s_result(15 downto 0) <= I_dataA;
+                         else
+                            s_result(15 downto 0) <= std_logic_vector(signed(I_PC) + signed(I_imm(10 downto 0) & '0'));
+                         end if;
+                         s_shouldBranch <= '1';
+                           
+                        
                     when others =>
                         s_result <= "00" & X"FEFE";
              end case;

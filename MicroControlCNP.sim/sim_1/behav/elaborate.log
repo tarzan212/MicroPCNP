@@ -15,5 +15,7 @@ Compiling architecture behavioral of entity xil_defaultlib.decoder [decoder_defa
 Compiling architecture behavioral of entity xil_defaultlib.controlunit [controlunit_default]
 Compiling architecture behavioral of entity xil_defaultlib.alu [alu_default]
 Compiling architecture behavioral of entity xil_defaultlib.reg16_8 [reg16_8_default]
+Compiling architecture behavioral of entity xil_defaultlib.ram16 [ram16_default]
+Compiling architecture behavioral of entity xil_defaultlib.program_counter [program_counter_default]
 Compiling architecture behavioral of entity xil_defaultlib.alu_tb
 Built simulation snapshot alu_tb_behav

@@ -34,29 +34,31 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity controlunit is
     Port ( I_clk : in STD_LOGIC;
            I_reset : in STD_LOGIC;
-           O_state : out STD_LOGIC_VECTOR (3 downto 0));
+           O_state : out STD_LOGIC_VECTOR (4 downto 0));
 end controlunit;
 
 architecture Behavioral of controlunit is
-    signal s_state: std_logic_vector(3 downto 0) := "0001";
+    signal s_state: std_logic_vector(4 downto 0) := "00001";
 begin
     process(I_clk)
     begin
         if rising_edge(I_clk) then
             if I_reset = '1' then
-                s_state <= "0001";
+                s_state <= "00001";
             else 
                 case s_state is
-                    when "0001" =>
-                        s_state <= "0010";
-                    when "0010" =>
-                        s_state <= "0100";
-                    when "0100" =>
-                        s_state <= "1000";
-                    when "1000" =>
-                         s_state <= "0001";
+                    when "00001" =>
+                        s_state <= "00010";
+                    when "00010" =>
+                        s_state <= "00100";
+                    when "00100" =>
+                        s_state <= "01000";
+                    when "01000" =>
+                         s_state <= "10000";
+                    when "10000" =>
+                         s_state <= "00001";
                     when others =>
-                        s_state <= "0001";
+                        s_state <= "00001";
                 end case;
              end if;
         end if;

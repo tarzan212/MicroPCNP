@@ -34,9 +34,11 @@ use IEEE.STD_LOGIC_1164.ALL;
 package constantes is
 
     constant OPCODE_ADD: std_logic_vector(3 downto 0) := "0000";
+    constant OPCODE_AND: std_logic_vector (3 downto 0) := "0011";
     constant OPCODE_SUB: std_logic_vector(3 downto 0) := "0001";
     constant OPCODE_OR: std_logic_vector(3 downto 0) := "0010";
     constant OPCODE_LOAD: std_logic_vector(3 downto 0) := "1000";
+    constant OPCODE_JUMP: std_logic_vector(3 downto 0) := "1100";
     
     
     constant PCU_OP_NOP: std_logic_vector(1 downto 0) := "00";
