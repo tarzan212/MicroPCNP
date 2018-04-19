@@ -2,11 +2,11 @@
 # Vivado v2015.4 (64-bit)
 # SW Build 1412921 on Wed Nov 18 09:43:45 MST 2015
 # IP Build 1412160 on Tue Nov 17 13:47:24 MST 2015
-# Start of session at: Tue Mar 27 18:09:00 2018
-# Process ID: 10208
+# Start of session at: Thu Apr 19 20:56:08 2018
+# Process ID: 14668
 # Current directory: D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.runs/synth_1
-# Command line: vivado.exe -log reg16_8.vds -mode batch -messageDb vivado.pb -notrace -source reg16_8.tcl
-# Log file: D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.runs/synth_1/reg16_8.vds
+# Command line: vivado.exe -log topmodule.vds -mode batch -messageDb vivado.pb -notrace -source topmodule.tcl
+# Log file: D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.runs/synth_1/topmodule.vds
 # Journal file: D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.runs/synth_1\vivado.jou
 #-----------------------------------------------------------
-source reg16_8.tcl -notrace
+source topmodule.tcl -notrace

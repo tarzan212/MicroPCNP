@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 27.03.2018 17:51:04
+-- Create Date: 19.04.2018 20:09:34
 -- Design Name: 
--- Module Name: alu_tb - Behavioral
+-- Module Name: topmodule - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -33,12 +33,14 @@ use work.constantes.all;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity alu_tb is
---  Port ( );
-end alu_tb;
+entity topmodule is
+    Port ( I_clk : in STD_LOGIC;
+           I_switch : in STD_LOGIC_VECTOR (3 downto 0);
+           O_leds : out STD_LOGIC_VECTOR (7 downto 0));
+end topmodule;
 
-architecture Behavioral of alu_tb is
-     COMPONENT alu
+architecture Behavioral of topmodule is
+COMPONENT alu
      PORT( I_clk : in STD_LOGIC;
                 I_en : in STD_LOGIC;
                 I_dataA : in STD_LOGIC_VECTOR (15 downto 0);
@@ -102,9 +104,12 @@ architecture Behavioral of alu_tb is
                  );
       END COMPONENT;
       
+     COMPONENT ClockingModule
+     Port ( iClk : in STD_LOGIC;  
+            reset : in STD_LOGIC; 
+            oClk : out STD_LOGIC);
+     END COMPONENT;
      
-     
-     signal I_clk : std_logic := '0';
      signal reset: std_logic := '0';
      signal en_decoder : std_logic := '0';
      signal en_readReg: std_logic := '0';
@@ -130,19 +135,21 @@ architecture Behavioral of alu_tb is
      --- RAM
      
      signal I_selA : std_logic_vector(2 downto 0) := (others => '0');
-        signal I_selB : std_logic_vector(2 downto 0) := (others => '0');
-        signal I_selD : std_logic_vector(2 downto 0) := (others => '0');
+     signal I_selB : std_logic_vector(2 downto 0) := (others => '0');
+     signal I_selD : std_logic_vector(2 downto 0) := (others => '0');
         
         ---OUTPUT RAM
         --Outputs
-           signal O_dataA : std_logic_vector(15 downto 0);
-           signal O_dataB : std_logic_vector(15 downto 0);
+    signal O_dataA : std_logic_vector(15 downto 0);
+    signal O_dataB : std_logic_vector(15 downto 0);
      
      signal state: std_logic_vector(4 downto 0);
-     constant I_clk_period: time := 10ns; 
-        
+     
+     --Leds
+     signal leds: std_logic_vector(7 downto 0) := (others => '0');
+     signal dividedClock : std_logic;
 begin
-    uut_dec: decoder PORT MAP (
+      dec: decoder PORT MAP (
                 I_instr => instruction,
                I_clk => I_clk,
                I_enable => en_decoder,
@@ -198,6 +205,11 @@ begin
            I_nPCopcode => pcOp,
            O_pc => I_PC );
            
+       uut_clockingmodule: ClockingModule PORT MAP(
+                    iClk => I_clk,
+                    reset => reset,
+                    oClk => dividedClock );
+           
            addrRam <= I_PC;
            dataWriteRam <= X"FFFF";
            ramwe <= '0';
@@ -213,23 +225,16 @@ begin
        en_regWrite <= state(3);
        
         
-        I_clk_process: process
-        begin
-            I_clk <= '0';
-            wait for I_clk_period/2;
-            I_clk <= '1';
-            wait for I_clk_period/2;
-        end process;
-        
         pcIn <= O_dataRes;
         
-        stim_proc: process
+        process(dividedClock,dataWriteRam) 
         begin
-          reset <= '1'; -- reset control unit
-          wait for I_clk_period;
-          reset <= '0';
-         wait;
-       end process;
-
-
+            if rising_edge(dividedClock) then
+            if (dataWriteRam = X"1000") then
+              leds <= O_dataB(7 downto 0);
+            end if;
+          end if;
+        end process;
+        O_leds <= leds(7 downto 1) & reset;
+        reset <= I_switch(0);
 end Behavioral;

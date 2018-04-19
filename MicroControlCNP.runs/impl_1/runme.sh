@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.runs/synth_1'
+HD_PWD='D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.runs/impl_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log
@@ -40,4 +40,8 @@ EAStep()
      fi
 }
 
-EAStep vivado -log topmodule.vds -m64 -mode batch -messageDb vivado.pb -notrace -source topmodule.tcl
+# pre-commands:
+/bin/touch .init_design.begin.rst
+EAStep vivado -log topmodule.vdi -applog -m64 -messageDb vivado.pb -mode batch -source topmodule.tcl -notrace
+
+
