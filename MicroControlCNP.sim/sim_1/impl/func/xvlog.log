@@ -1,0 +1,10 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.sim/sim_1/impl/func/alu_tb_func_impl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ClockingModule
+INFO: [VRFC 10-311] analyzing module alu
+INFO: [VRFC 10-311] analyzing module controlunit
+INFO: [VRFC 10-311] analyzing module decoder
+INFO: [VRFC 10-311] analyzing module program_counter
+INFO: [VRFC 10-311] analyzing module ram16
+INFO: [VRFC 10-311] analyzing module reg16_8
+INFO: [VRFC 10-311] analyzing module topmodule
+INFO: [VRFC 10-311] analyzing module glbl

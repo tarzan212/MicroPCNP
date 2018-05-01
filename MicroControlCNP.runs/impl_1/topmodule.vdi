@@ -2,107 +2,38 @@
 # Vivado v2015.4 (64-bit)
 # SW Build 1412921 on Wed Nov 18 09:43:45 MST 2015
 # IP Build 1412160 on Tue Nov 17 13:47:24 MST 2015
-# Start of session at: Thu Apr 19 20:58:37 2018
-# Process ID: 9476
+# Start of session at: Fri Apr 20 18:18:00 2018
+# Process ID: 10016
 # Current directory: D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.runs/impl_1
 # Command line: vivado.exe -log topmodule.vdi -applog -messageDb vivado.pb -mode batch -source topmodule.tcl -notrace
 # Log file: D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.runs/impl_1/topmodule.vdi
 # Journal file: D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.runs/impl_1\vivado.jou
 #-----------------------------------------------------------
 source topmodule.tcl -notrace
-Design is defaulting to srcset: sources_1
-Design is defaulting to constrset: constrs_1
+Command: open_checkpoint topmodule_opt.dcp
 INFO: [Netlist 29-17] Analyzing 1 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-479] Netlist was created with Vivado 2015.4
 INFO: [Device 21-403] Loading part xc7vx485tffg1157-1
 INFO: [Project 1-570] Preparing netlist for logic optimization
-Parsing XDC File [D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.srcs/constrs_1/new/constraints.xdc]
-CRITICAL WARNING: [Common 17-69] Command failed: 'W5' is not a valid site or package pin name. [D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.srcs/constrs_1/new/constraints.xdc:7]
-CRITICAL WARNING: [Common 17-69] Command failed: 'V17' is not a valid site or package pin name. [D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.srcs/constrs_1/new/constraints.xdc:12]
-CRITICAL WARNING: [Common 17-69] Command failed: 'V16' is not a valid site or package pin name. [D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.srcs/constrs_1/new/constraints.xdc:14]
-CRITICAL WARNING: [Common 17-69] Command failed: 'W16' is not a valid site or package pin name. [D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.srcs/constrs_1/new/constraints.xdc:16]
-CRITICAL WARNING: [Common 17-69] Command failed: 'W17' is not a valid site or package pin name. [D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.srcs/constrs_1/new/constraints.xdc:18]
-CRITICAL WARNING: [Vivado 12-1411] Cannot set LOC property of ports, Site location is not valid [D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.srcs/constrs_1/new/constraints.xdc:47]
-CRITICAL WARNING: [Common 17-69] Command failed: 'U19' is not a valid site or package pin name. [D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.srcs/constrs_1/new/constraints.xdc:51]
-CRITICAL WARNING: [Common 17-69] Command failed: 'V19' is not a valid site or package pin name. [D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.srcs/constrs_1/new/constraints.xdc:53]
-CRITICAL WARNING: [Common 17-69] Command failed: 'W18' is not a valid site or package pin name. [D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.srcs/constrs_1/new/constraints.xdc:55]
-CRITICAL WARNING: [Common 17-69] Command failed: 'U15' is not a valid site or package pin name. [D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.srcs/constrs_1/new/constraints.xdc:57]
-CRITICAL WARNING: [Common 17-69] Command failed: 'U14' is not a valid site or package pin name. [D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.srcs/constrs_1/new/constraints.xdc:59]
-CRITICAL WARNING: [Common 17-69] Command failed: 'V14' is not a valid site or package pin name. [D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.srcs/constrs_1/new/constraints.xdc:61]
-CRITICAL WARNING: [Common 17-69] Command failed: 'V13' is not a valid site or package pin name. [D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.srcs/constrs_1/new/constraints.xdc:63]
-Finished Parsing XDC File [D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.srcs/constrs_1/new/constraints.xdc]
-INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Parsing XDC File [D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.runs/impl_1/.Xil/Vivado-10016-/dcp/topmodule.xdc]
+Finished Parsing XDC File [D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.runs/impl_1/.Xil/Vivado-10016-/dcp/topmodule.xdc]
+Reading XDEF placement.
+Reading placer database...
+Reading XDEF routing.
+Read XDEF File: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.100 . Memory (MB): peak = 600.383 ; gain = 0.000
+Restored from archive | CPU: 0.000000 secs | Memory: 0.000000 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.100 . Memory (MB): peak = 600.383 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-link_design: Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 600.477 ; gain = 388.949
-Command: opt_design
-Attempting to get a license for feature 'Implementation' and/or device 'xc7vx485t'
-INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7vx485t'
-INFO: [Common 17-86] Your Implementation license expires in 1 day(s)
-Running DRC as a precondition to command opt_design
-
-Starting DRC Task
-INFO: [DRC 23-27] Running DRC with 2 threads
-INFO: [Project 1-461] DRC finished with 0 Errors
-INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
-
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.242 . Memory (MB): peak = 605.426 ; gain = 2.563
-INFO: [Timing 38-35] Done setting XDC timing constraints.
-
-Starting Logic Optimization Task
-Implement Debug Cores | Checksum: e0267493
-
-Phase 1 Retarget
-INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-INFO: [Opt 31-49] Retargeted 0 cell(s).
-Phase 1 Retarget | Checksum: e0267493
-
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.113 . Memory (MB): peak = 1164.281 ; gain = 0.000
-
-Phase 2 Constant Propagation
-INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-INFO: [Opt 31-10] Eliminated 0 cells.
-Phase 2 Constant Propagation | Checksum: e0267493
-
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.185 . Memory (MB): peak = 1164.281 ; gain = 0.000
-
-Phase 3 Sweep
-INFO: [Opt 31-12] Eliminated 0 unconnected nets.
-INFO: [Opt 31-11] Eliminated 0 unconnected cells.
-Phase 3 Sweep | Checksum: e0267493
-
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.274 . Memory (MB): peak = 1164.281 ; gain = 0.000
-
-Starting Connectivity Check Task
-
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1164.281 ; gain = 0.000
-Ending Logic Optimization Task | Checksum: e0267493
-
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.285 . Memory (MB): peak = 1164.281 ; gain = 0.000
-
-Starting Power Optimization Task
-INFO: [Pwropt 34-132] Skipping clock gating for clocks with a period < 2.00 ns.
-Ending Power Optimization Task | Checksum: e0267493
-
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.095 . Memory (MB): peak = 1164.281 ; gain = 0.000
-INFO: [Common 17-83] Releasing license: Implementation
-21 Infos, 0 Warnings, 13 Critical Warnings and 0 Errors encountered.
-opt_design completed successfully
-opt_design: Time (s): cpu = 00:00:14 ; elapsed = 00:00:17 . Memory (MB): peak = 1164.281 ; gain = 563.805
-Writing placer database...
-Writing XDEF routing.
-Writing XDEF routing logical nets.
-Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.170 . Memory (MB): peak = 1164.281 ; gain = 0.000
-INFO: [DRC 23-27] Running DRC with 2 threads
-INFO: [Coretcl 2-168] The results of DRC are in file D:/Naif Mehanna/Documents/Cours/IMA4/CNP/projet_cnp_rihme/MicroControlCNP/MicroControlCNP.runs/impl_1/topmodule_drc_opted.rpt.
+INFO: [Project 1-604] Checkpoint was created with Vivado v2015.4 (64-bit) build 1412921
+open_checkpoint: Time (s): cpu = 00:00:09 ; elapsed = 00:00:15 . Memory (MB): peak = 600.383 ; gain = 412.664
 INFO: [Vivado_Tcl 4-424] Cannot write hardware definition file as there are no IPI block design hardware handoff files present
 Command: place_design
 Attempting to get a license for feature 'Implementation' and/or device 'xc7vx485t'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7vx485t'
-INFO: [Common 17-86] Your Implementation license expires in 1 day(s)
+INFO: [Common 17-86] Your Implementation license expires in 0 day(s)
 INFO: [DRC 23-27] Running DRC with 2 threads
 INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
 INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
@@ -114,8 +45,8 @@ INFO: [Vivado_Tcl 4-198] DRC finished with 1 Errors
 INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
 ERROR: [Vivado_Tcl 4-23] Error(s) found during DRC. Placer not run.
 INFO: [Common 17-83] Releasing license: Implementation
-33 Infos, 0 Warnings, 13 Critical Warnings and 2 Errors encountered.
+17 Infos, 0 Warnings, 0 Critical Warnings and 2 Errors encountered.
 place_design failed
 ERROR: [Common 17-39] 'place_design' failed due to earlier errors.
 
-INFO: [Common 17-206] Exiting Vivado at Thu Apr 19 20:59:08 2018...
+INFO: [Common 17-206] Exiting Vivado at Fri Apr 20 18:18:19 2018...

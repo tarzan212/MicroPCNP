@@ -1,6 +1,6 @@
 Vivado Simulator 2015.4
 Copyright 1986-1999, 2001-2015 Xilinx, Inc. All Rights Reserved.
-Running: D:/Programmes/Xilinx/Vivado/2015.4/bin/unwrapped/win64.o/xelab.exe -wto 1d0fe448b73c4e818a648305ecd76786 --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot alu_tb_behav xil_defaultlib.alu_tb -log elaborate.log 
+Running: D:/Programmes/Xilinx/Vivado/2015.4/bin/unwrapped/win64.o/xelab.exe -wto 1d0fe448b73c4e818a648305ecd76786 --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot main_tb_behav xil_defaultlib.main_tb -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
 Completed static elaboration
@@ -17,5 +17,5 @@ Compiling architecture behavioral of entity xil_defaultlib.alu [alu_default]
 Compiling architecture behavioral of entity xil_defaultlib.reg16_8 [reg16_8_default]
 Compiling architecture behavioral of entity xil_defaultlib.ram16 [ram16_default]
 Compiling architecture behavioral of entity xil_defaultlib.program_counter [program_counter_default]
-Compiling architecture behavioral of entity xil_defaultlib.alu_tb
-Built simulation snapshot alu_tb_behav
+Compiling architecture behavioral of entity xil_defaultlib.main_tb
+Built simulation snapshot main_tb_behav

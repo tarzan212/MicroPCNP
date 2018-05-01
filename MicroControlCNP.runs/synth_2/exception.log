@@ -1,0 +1,4 @@
+ERROR: Exception caught trying to open file D:\Naif Mehanna\Documents\Cours\IMA4\CNP\projet_cnp_rihme\MicroControlCNP\MicroControlCNP.runs\synth_2/runme.log
+	Exception name: Error
+	Exception error code: 70
+	Exception message: Permission refusée
