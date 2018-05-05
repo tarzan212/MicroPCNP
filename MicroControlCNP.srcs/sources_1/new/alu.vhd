@@ -64,40 +64,125 @@ begin
                         s_result(16 downto 0) <= std_logic_vector(signed(I_dataA(15) & I_dataA) + signed(I_dataB(15)& I_dataB));
                     end if;
                     s_shouldBranch <= '0';
-                  when OPCODE_OR =>
-                      s_result(15 downto 0) <= I_dataA or I_dataB;
-                      s_shouldBranch <= '0';
-                  when OPCODE_LOAD =>
-                        if I_aluop(0) = '0' then
+
+                when OPCODE_SUB =>
+                    if I_aluop(0) = '0' then
+                        s_result(16 downto 0) <= std_logic_vector(unsigned('0' & I_dataA) - unsigned('0' & I_dataB));
+                    else
+                        s_result(16 downto 0) <= std_logic_vector(signed(I_dataA(15) & I_dataA) - signed(I_dataB(15)& I_dataB));
+                    end if;
+                    s_shouldBranch <= '0'; 
+
+                when OPCODE_OR =>
+                    s_result(15 downto 0) <= I_dataA or I_dataB;
+                    s_shouldBranch <= '0';
+
+                when OPCODE_LOAD =>
+                    if I_aluop(0) = '0' then
                           s_result(15 downto 0) <= I_imm(7 downto 0) & X"00";
-                        else
+                    else
                           s_result(15 downto 0) <= X"00" & I_imm(7 downto 0);
-                        end if;
-                        s_shouldBranch <= '0';
-                  when OPCODE_AND =>
-                        if I_aluop(0) = '0' then
-                            s_result(16 downto 0) <= std_logic_vector(unsigned('0' & I_dataA) AND unsigned('0' & I_dataB));
-                        else 
-                            s_result(16 downto 0) <= std_logic_vector(signed(I_dataA(15) & I_dataA) AND signed(I_dataB(15) & I_dataB));
-                        end if;
+                    end if;
+                    s_shouldBranch <= '0';
+
+                when OPCODE_AND =>
+                    if I_aluop(0) = '0' then
+                        s_result(16 downto 0) <= std_logic_vector(unsigned('0' & I_dataA) AND unsigned('0' & I_dataB));
+                    else 
+                        s_result(16 downto 0) <= std_logic_vector(signed(I_dataA(15) & I_dataA) AND signed(I_dataB(15) & I_dataB));
+                    end if;
                         
-                  when OPCODE_JUMP => 
-                         if I_aluop(0) = '0' then
-                                                -- set PC to reg(a) 
-                               s_result(15 downto 0) <= I_dataA;
-                         else
-                            s_result(15 downto 0) <= std_logic_vector(signed(I_PC) + signed(I_imm(10 downto 0) & '0'));
-                         end if;
-                         s_shouldBranch <= '1';
-                           
+                when OPCODE_JUMP => 
+                    if I_aluop(0) = '0' then
+                          -- set PC to reg(a) 
+                        s_result(15 downto 0) <= I_dataA;
+                    else
+                        s_result(15 downto 0) <= std_logic_vector(signed(I_PC) + signed(I_imm(10 downto 0) & '0'));
+                    end if;
+                    s_shouldBranch <= '1';
+
+                when OPCODE_SHL =>
+                    case I_dataB(3 downto 0) is
+                        when "0001" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_left(unsigned(I_dataA), 1));
+                        when "0010" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_left(unsigned(I_dataA), 2));
+                        when "0011" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_left(unsigned(I_dataA), 3));
+                        when "0100" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_left(unsigned(I_dataA), 4));
+                        when "0101" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_left(unsigned(I_dataA), 5));
+                        when "0110" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_left(unsigned(I_dataA), 6));
+                        when "0111" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_left(unsigned(I_dataA), 7));
+                        when "1000" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_left(unsigned(I_dataA), 8));
+                        when "1001" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_left(unsigned(I_dataA), 9));
+                        when "1010" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_left(unsigned(I_dataA), 10));
+                        when "1011" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_left(unsigned(I_dataA), 11));
+                        when "1100" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_left(unsigned(I_dataA), 12));
+                        when "1101" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_left(unsigned(I_dataA), 13));
+                        when "1110" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_left(unsigned(I_dataA), 14));
+                        when "1111" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_left(unsigned(I_dataA), 15));
+                        when others =>
+                            s_result(15 downto 0) <= I_dataA;
+                    end case;
+                    s_shouldBranch <= '0'; 
+
+                when OPCODE_SHR =>
+                    case I_dataB(3 downto 0) is
+                        when "0001" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_right(unsigned(I_dataA), 1));
+                        when "0010" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_right(unsigned(I_dataA), 2));
+                        when "0011" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_right(unsigned(I_dataA), 3));
+                        when "0100" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_right(unsigned(I_dataA), 4));
+                        when "0101" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_right(unsigned(I_dataA), 5));
+                        when "0110" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_right(unsigned(I_dataA), 6));
+                        when "0111" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_right(unsigned(I_dataA), 7));
+                        when "1000" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_right(unsigned(I_dataA), 8));
+                        when "1001" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_right(unsigned(I_dataA), 9));
+                        when "1010" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_right(unsigned(I_dataA), 10));
+                        when "1011" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_right(unsigned(I_dataA), 11));
+                        when "1100" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_right(unsigned(I_dataA), 12));
+                        when "1101" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_right(unsigned(I_dataA), 13));
+                        when "1110" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_right(unsigned(I_dataA), 14));
+                        when "1111" =>
+                            s_result(15 downto 0) <= std_logic_vector(shift_right(unsigned(I_dataA), 15));
+                        when others =>
+                            s_result(15 downto 0) <= I_dataA;
+                    end case;
+                    s_shouldBranch <= '0';          
                         
-                    when others =>
-                        s_result <= "00" & X"FEFE";
-             end case;
-         end if;
-     end process;
+                when others =>
+                    s_result <= "00" & X"FEFE";
+            
+            end case;
+        end if;
+    end process;
      
-     O_dataRes <= s_result(15 downto 0);
-     O_shouldBranch <= s_shouldBranch;
+    O_dataRes <= s_result(15 downto 0);
+    O_shouldBranch <= s_shouldBranch;
 
 end Behavioral;
