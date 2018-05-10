@@ -1,7 +1,7 @@
 Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------
 | Tool Version      : Vivado v.2015.4 (win64) Build 1412921 Wed Nov 18 09:43:45 MST 2015
-| Date              : Tue May 01 14:05:37 2018
+| Date              : Thu May 10 21:41:24 2018
 | Host              : NaifMehanna-Laptop running 64-bit major release  (build 9200)
 | Command           : report_clock_utilization -file topmodule_clock_utilization_routed.rpt
 | Design            : topmodule
@@ -48,7 +48,7 @@ Table of Contents
 | Index | BUFG Cell              | Net Name          | BELs | Sites | Fixed |
 +-------+------------------------+-------------------+------+-------+-------+
 |     1 | I_clk_IBUF_BUFG_inst   | I_clk_IBUF_BUFG   |   28 |     7 |    no |
-|     2 | dividedClock_BUFG_inst | dividedClock_BUFG |  183 |    63 |    no |
+|     2 | dividedClock_BUFG_inst | dividedClock_BUFG |  183 |    65 |    no |
 +-------+------------------------+-------------------+------+-------+-------+
 
 

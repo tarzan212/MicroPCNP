@@ -53,7 +53,7 @@ begin
             O_selA <= I_instr(7 downto 5);
             O_selB <= I_instr(4 downto 2);
             O_selD <= I_instr(11 downto 9);
-            O_imm <= I_instr(7 downto 0) & I_instr(7 downto 0);
+            O_imm <= I_instr(7 downto 0) & I_instr(7 downto 0); -- Afin de former sur 16 bits
             O_aluop <= I_instr(15 downto 12) & I_instr(8);
             
             case I_instr(15 downto 12) is  

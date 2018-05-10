@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_2" LaunchPart="xc7a35tcpg236-1" LaunchTime="1525179865">
-  <File Type="OPT-DCP" Name="topmodule_opt.dcp"/>
+<GenRun Id="impl_2" LaunchPart="xc7a35tcpg236-1" LaunchTime="1525981208">
   <File Type="RUN-CONSTRS" Name="$PDATADIR/runs/impl_2/constrs_in.xml"/>
+  <File Type="OPT-DCP" Name="topmodule_opt.dcp"/>
   <File Type="RUN-SRCS" Name="$PDATADIR/runs/impl_2/sources.xml"/>
+  <File Type="RUN-STRAT" Name="$PDATADIR/runs/impl_2/impl_2.psg"/>
   <File Type="ROUTE-DCP" Name="topmodule_routed.dcp"/>
   <File Type="PA-TCL" Name="topmodule.tcl"/>
-  <File Type="RUN-STRAT" Name="$PDATADIR/runs/impl_2/impl_2.psg"/>
-  <File Type="OPT-DRC" Name="topmodule_drc_opted.rpt"/>
   <File Type="INIT-TIMING" Name="topmodule_timing_summary_init.rpt"/>
+  <File Type="OPT-DRC" Name="topmodule_drc_opted.rpt"/>
   <File Type="OPT-TIMING" Name="topmodule_timing_summary_opted.rpt"/>
   <File Type="OPT-HWDEF" Name="topmodule.hwdef"/>
   <File Type="PWROPT-DCP" Name="topmodule_pwropt.dcp"/>
@@ -25,8 +25,8 @@
   <File Type="POSTPLACE-PWROPT-DCP" Name="topmodule_postplace_pwropt.dcp"/>
   <File Type="POSTPLACE-PWROPT-TIMING" Name="topmodule_timing_summary_postplace_pwropted.rpt"/>
   <File Type="PHYSOPT-DCP" Name="topmodule_physopt.dcp"/>
-  <File Type="RDI-RDI" Name="topmodule.vdi"/>
   <File Type="PHYSOPT-DRC" Name="topmodule_drc_physopted.rpt"/>
+  <File Type="RDI-RDI" Name="topmodule.vdi"/>
   <File Type="PHYSOPT-TIMING" Name="topmodule_timing_summary_physopted.rpt"/>
   <File Type="ROUTE-DRC" Name="topmodule_drc_routed.rpt"/>
   <File Type="ROUTE-DRC-PB" Name="topmodule_drc_routed.pb"/>
