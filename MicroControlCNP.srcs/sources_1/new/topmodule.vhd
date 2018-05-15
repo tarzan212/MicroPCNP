@@ -36,7 +36,9 @@ use work.constantes.all;
 entity topmodule is
     Port ( I_clk : in STD_LOGIC;
            I_switch : in STD_LOGIC_VECTOR (3 downto 0);
-           O_leds : out STD_LOGIC_VECTOR (15 downto 0));
+           O_leds : out STD_LOGIC_VECTOR (15 downto 0);
+           O_Aff: out STD_LOGIC_VECTOR (7 downto 0);
+           O_AN: out STD_LOGIC_VECTOR (3 downto 0));
 end topmodule;
 
 architecture Behavioral of topmodule is
@@ -110,6 +112,14 @@ COMPONENT alu
             oClk : out STD_LOGIC);
      END COMPONENT;
      
+     COMPONENT Afficheurs
+     Port ( iClk : in  STD_LOGIC;
+            ireset     : in  STD_LOGIC;
+            iData      : in  STD_LOGIC_VECTOR (15 downto 0);
+            oAff       : out  STD_LOGIC_VECTOR (7 downto 0);
+            oAn        : out  STD_LOGIC_VECTOR (3 downto 0));
+     END COMPONENT;
+     
      signal reset: std_logic := '0';
      -- Enables
      signal en_decoder : std_logic := '0';
@@ -153,6 +163,11 @@ COMPONENT alu
      
      --Leds
      signal leds: std_logic_vector(15 downto 0) := (others => '0');
+     
+     -- Afficheur 
+     signal affData: std_logic_vector(15 downto 0) := (others => '0');
+     signal aff: std_logic_vector(7 downto 0) := (others => '0');
+     signal an: std_logic_vector(3 downto 0):= (others => '0');
      --Clock
      signal dividedClock : std_logic;
 begin
@@ -221,6 +236,13 @@ begin
            I_nPCopcode => pcOp,
            O_pc => PC );
            
+      --- Segments
+      uut_seg: Afficheurs PORT MAP (
+        iClk => dividedClock,
+        ireset => reset,
+        iData => affData,
+        oAff => aff,
+        oAn => an );
        
            
       addrRam <= PC;
@@ -244,9 +266,12 @@ begin
         begin
             if rising_edge(dividedClock) then
                leds <= dataB(15 downto 0);
+               affData <= dataRes;
            end if;
       end process;
         
       O_leds <= leds(14 downto 0) & reset;
+      O_Aff <= aff;
+      O_AN <= an;
       reset <= I_switch(0);
 end Behavioral;

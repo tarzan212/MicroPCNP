@@ -1,7 +1,7 @@
 Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2015.4 (win64) Build 1412921 Wed Nov 18 09:43:45 MST 2015
-| Date             : Thu May 10 21:41:24 2018
+| Date             : Tue May 15 12:38:12 2018
 | Host             : NaifMehanna-Laptop running 64-bit major release  (build 9200)
 | Command          : 
 | Design           : topmodule
@@ -30,12 +30,12 @@ Table of Contents
 ----------
 
 +--------------------------+-------+
-| Total On-Chip Power (W)  | 0.519 |
-| Dynamic (W)              | 0.446 |
+| Total On-Chip Power (W)  | 0.708 |
+| Dynamic (W)              | 0.635 |
 | Device Static (W)        | 0.073 |
 | Effective TJA (C/W)      | 5.0   |
-| Max Ambient (C)          | 82.4  |
-| Junction Temperature (C) | 27.6  |
+| Max Ambient (C)          | 81.5  |
+| Junction Temperature (C) | 28.5  |
 | Confidence Level         | Low   |
 | Setting File             | ---   |
 | Simulation Activity File | ---   |
@@ -49,18 +49,18 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
-| Slice Logic              |     0.183 |      517 |       --- |             --- |
-|   LUT as Logic           |     0.144 |      221 |     20800 |            1.06 |
+| Slice Logic              |     0.338 |      565 |       --- |             --- |
+|   LUT as Logic           |     0.295 |      232 |     20800 |            1.12 |
+|   Register               |     0.019 |      176 |     41600 |            0.42 |
 |   CARRY4                 |     0.018 |       23 |      8150 |            0.28 |
-|   Register               |     0.016 |      147 |     41600 |            0.35 |
 |   BUFG                   |     0.006 |        2 |        32 |            6.25 |
-|   Others                 |     0.000 |       13 |       --- |             --- |
+|   Others                 |     0.000 |       15 |       --- |             --- |
 |   F7/F8 Muxes            |     0.000 |        4 |     32600 |            0.01 |
 |   LUT as Distributed RAM |     0.000 |       40 |      9600 |            0.42 |
-| Signals                  |     0.247 |      438 |       --- |             --- |
-| I/O                      |     0.016 |       21 |       106 |           19.81 |
+| Signals                  |     0.281 |      470 |       --- |             --- |
+| I/O                      |     0.016 |       33 |       106 |           31.13 |
 | Static Power             |     0.073 |          |           |                 |
-| Total                    |     0.519 |          |           |                 |
+| Total                    |     0.708 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -70,7 +70,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.456 |       0.446 |      0.010 |
+| Vccint    |       1.000 |     0.646 |       0.635 |      0.011 |
 | Vccaux    |       1.800 |     0.013 |       0.000 |      0.013 |
 | Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
@@ -137,11 +137,11 @@ Table of Contents
 +---------------------------+-----------+
 | Name                      | Power (W) |
 +---------------------------+-----------+
-| topmodule                 |     0.446 |
+| topmodule                 |     0.635 |
 |   dec                     |    <0.001 |
-|   uut_alu                 |     0.007 |
-|   uut_clockingmodule      |     0.273 |
-|   uut_controlunit         |     0.135 |
+|   uut_alu                 |     0.006 |
+|   uut_clockingmodule      |     0.264 |
+|   uut_controlunit         |     0.112 |
 |   uut_pc                  |     0.002 |
 |   uut_ram                 |     0.000 |
 |     regs_reg_r1_0_7_0_5   |     0.000 |
@@ -167,6 +167,7 @@ Table of Contents
 |     ram_16_reg_0_7_7_7    |     0.000 |
 |     ram_16_reg_0_7_8_8    |     0.000 |
 |     ram_16_reg_0_7_9_9    |     0.000 |
+|   uut_seg                 |     0.222 |
 +---------------------------+-----------+
 
 
