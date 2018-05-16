@@ -39,14 +39,14 @@ end FreqDiv150;
 
 architecture Behavioral of FreqDiv150 is
  signal temp : std_logic;
- signal cnt : integer range 0 to 666666 := 0;
+ signal cnt : integer range 0 to 40000 := 0;
 begin
     freq_div : process(reset,iClk) begin
         if(reset = '1') then
             temp <= '0';
-            cnt <= '0';
+            cnt <= 0;
         elsif rising_edge(iClk) then
-            if( cnt = 666666) then
+            if( cnt = 40000) then
                 temp <= NOT(temp);
                 cnt <= 0;
             else

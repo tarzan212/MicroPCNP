@@ -106,10 +106,16 @@ COMPONENT alu
                  );
       END COMPONENT;
       
-     COMPONENT ClockingModule
+     COMPONENT FreqDiv150
      Port ( iClk : in STD_LOGIC;  
             reset : in STD_LOGIC; 
             oClk : out STD_LOGIC);
+     END COMPONENT;
+     
+     COMPONENT ClockingModule
+     PORT (    iClk : in STD_LOGIC;  
+                 reset : in STD_LOGIC; 
+                 oClk : out STD_LOGIC);
      END COMPONENT;
      
      COMPONENT Afficheurs
@@ -170,16 +176,22 @@ COMPONENT alu
      signal an: std_logic_vector(3 downto 0):= (others => '0');
      --Clock
      signal dividedClock : std_logic;
+     signal dividedClockSlower: std_logic;
 begin
        --- Diviseur de frequences
-       uut_clockingmodule: ClockingModule PORT MAP(
+       uut_freqdiv: FreqDiv150 PORT MAP(
                     iClk => I_clk,
                     reset => reset,
                     oClk => dividedClock );
+                    
+       uut_clockingmod: ClockingModule PORT MAP(
+                        iClk => I_clk,
+                         reset => reset,
+                        oClk => dividedClockSlower );
       --- Decodeur
       dec: decoder PORT MAP (
                 I_instr => instruction,
-               I_clk => dividedClock,
+               I_clk => dividedClockSlower,
                I_enable => en_decoder,
                O_selD => selD,
                O_selA => selA,
@@ -190,13 +202,13 @@ begin
               );
      --- Unite de controle    
      uut_controlunit: controlunit PORT MAP (
-        I_clk=> dividedClock,
+        I_clk=> dividedClockSlower,
         I_reset => reset,
         O_state => state);
         
     --- ALU       
     uut_alu: alu PORT MAP(
-        I_clk => dividedClock,
+        I_clk => dividedClockSlower,
         I_en => en_alu,
         I_PC=>PC,
         I_aluop => aluop,
@@ -210,7 +222,7 @@ begin
      
      --- RAM
      uut_ram: reg16_8 PORT MAP (
-        I_clk => dividedClock,
+        I_clk => dividedClockSlower,
         I_en => en_readReg or en_regWrite,
         I_dataD => dataRes,
         O_dataA => dataA,
@@ -223,7 +235,7 @@ begin
        
       --- Mémoire de programme
       uut_ram16 : ram16 PORT MAP (
-           I_clk => dividedClock,
+           I_clk => dividedClockSlower,
            I_we => ramwe,
            I_addr => addrRam,
            I_data => dataWriteRam,
@@ -231,7 +243,7 @@ begin
            
       --- Program counter   
       uut_pc : program_counter PORT MAP (
-           I_clk => dividedClock,
+           I_clk => dividedClockSlower,
            I_nPc => pcIn,
            I_nPCopcode => pcOp,
            O_pc => PC );
@@ -262,9 +274,9 @@ begin
         
       pcIn <= dataRes;
         
-      process(dividedClock) 
+      process(dividedClockSlower) 
         begin
-            if rising_edge(dividedClock) then
+            if rising_edge(dividedClockSlower) then
                leds <= dataB(15 downto 0);
                affData <= dataRes;
            end if;
